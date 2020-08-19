@@ -1,0 +1,45 @@
+body {
+    --flame: #e53d00ff;
+    --misty-rose: #ffe1d7ff;
+    --cultured: #fafafaff;
+    --middle-yellow: #ffe900ff;
+    --viridian-green: #21a0a0ff;
+    --rich-black-fogra-29: #000f14ff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.logo-div {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #202020;
+}
+
+h1 {
+    font-size: 1.2rem;
+}
+
+.header-logo {
+    height: 35px;
+    width: 35px;
+    filter: saturate(120%) contrast(110%);
+}
+
+.navLinks {
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+.login {
+    color: var(--rich-black-fogra-29);
+}
+
+.signup {
+    color: var(--flame);
+}

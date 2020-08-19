@@ -3,27 +3,37 @@ import {
   BrowserRouter as Router, 
   Route, 
   Switch,
-  Link,
 } from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
-import Home from './Home.js';
+import Home from './Home/Home.js';
 import Authorization from './Authorization.js';
 import TodoList from './TodoList.js';
+import Header from './Header/Header.js';
+import Footer from './Footer.js';
+import './App.css';
 
 class App extends React.Component {
+  state = {
+    token: localStorage.getItem('token'),
+  }
+
+  handleToken = (token) => {
+    this.setState({ token: token })
+
+    localStorage.setItem('token', token)
+  }
+
+  clearToken = () => {
+    this.setState({ token: ''})
+
+    localStorage.setItem('token', '')
+  }
+
   render() { 
     return (
       <>
       <body>
             <Router>
-                <header>
-                  {/* <Header /> */}
-                  <nav>
-                    <Link className="navLinks" to="/">Home</Link>
-                    <Link className="navLinks" to="/todo">Admin</Link>
-                  </nav>
-                </header>
+                <Header />
                 <Switch>
                     <Route 
                         path="/" 
@@ -31,17 +41,17 @@ class App extends React.Component {
                         render={(routerProps) => <Home {...routerProps} />} 
                     />
                     <Route 
-                        path="/auth" 
+                        path="/login" 
                         exact
-                        render={(routerProps) => <Authorization {...routerProps} />} 
+                        render={(routerProps) => <Authorization handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
                     />
                     <Route 
                         path="/todo" 
                         exact
-                        render={(routerProps) => <TodoList {...routerProps} />} 
+                        render={(routerProps) => <TodoList token={this.state.token} {...routerProps} />} 
                     />
                 </Switch>
-                {/* <Footer /> */}
+                <Footer />
             </Router>
         </body>
         </>
