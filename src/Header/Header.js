@@ -14,8 +14,17 @@ class Header extends React.Component {
                     </Link>
                 </div>
                 <nav>
-                    <Link className="navLinks login" to="/login">Login</Link>
-                    <Link className="navLinks signup" to="/todo">Signup</Link>
+                    {
+                        !this.props.token &&
+                        <>
+                        <Link className="navLinks login" to="/login">Login</Link>
+                        <Link className="navLinks signup" to="/signup">Signup</Link>
+                        </>
+                    }
+                    {
+                        this.props.token &&
+                        <Link className="navLinks signup" onClick={this.props.logout} to="/">Logout</Link>
+                    }
                 </nav>
             </header>
         );

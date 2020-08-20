@@ -4,3 +4,8 @@ body {
   grid-template-rows: auto 1fr auto;
   background-color: var(--cultured);
 }
+
+footer {
+  justify-self: end;
+  font-size: 14px;
+}

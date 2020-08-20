@@ -5,11 +5,12 @@ import {
   Switch,
 } from 'react-router-dom';
 import Home from './Home/Home.js';
-import Authorization from './Authorization.js';
 import TodoList from './Todo/TodoList.js';
 import Header from './Header/Header.js';
 import Footer from './Footer.js';
 import './App.css';
+import SignIn from './Authorization/SignIn.js';
+import Signup from './Authorization/Signup.js';
 
 class App extends React.Component {
   state = {
@@ -30,10 +31,9 @@ class App extends React.Component {
 
   render() { 
     return (
-      <>
       <body>
             <Router>
-                <Header />
+                <Header token={this.state.token} logout={this.clearToken} />
                 <Switch>
                     <Route 
                         path="/" 
@@ -43,7 +43,12 @@ class App extends React.Component {
                     <Route 
                         path="/login" 
                         exact
-                        render={(routerProps) => <Authorization handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
+                        render={(routerProps) => <SignIn handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
+                    />
+                    <Route 
+                        path="/signup" 
+                        exact
+                        render={(routerProps) => <Signup handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
                     />
                     <Route 
                         path="/todo" 
@@ -54,7 +59,6 @@ class App extends React.Component {
                 <Footer />
             </Router>
         </body>
-        </>
     )
   }
 }
