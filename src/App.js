@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Home from './Home/Home.js';
 import Authorization from './Authorization.js';
-import TodoList from './TodoList.js';
+import TodoList from './Todo/TodoList.js';
 import Header from './Header/Header.js';
 import Footer from './Footer.js';
 import './App.css';
