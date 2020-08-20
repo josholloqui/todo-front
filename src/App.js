@@ -1,26 +1,66 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router, 
+  Route, 
+  Switch,
+} from 'react-router-dom';
+import Home from './Home/Home.js';
+import TodoList from './Todo/TodoList.js';
+import Header from './Header/Header.js';
+import Footer from './Footer.js';
 import './App.css';
+import SignIn from './Authorization/SignIn.js';
+import Signup from './Authorization/Signup.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    token: localStorage.getItem('token'),
+  }
+
+  handleToken = (token) => {
+    this.setState({ token: token })
+
+    localStorage.setItem('token', token)
+  }
+
+  clearToken = () => {
+    this.setState({ token: ''})
+
+    localStorage.setItem('token', '')
+  }
+
+  render() { 
+    return (
+      <body>
+            <Router>
+                <Header token={this.state.token} logout={this.clearToken} />
+                <Switch>
+                    <Route 
+                        path="/" 
+                        exact
+                        render={(routerProps) => <Home {...routerProps} />} 
+                    />
+                    <Route 
+                        path="/login" 
+                        exact
+                        render={(routerProps) => <SignIn handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
+                    />
+                    <Route 
+                        path="/signup" 
+                        exact
+                        render={(routerProps) => <Signup handleToken={this.handleToken} token={this.state.token} {...routerProps} />} 
+                    />
+                    <Route 
+                        path="/todo" 
+                        exact
+                        render={(routerProps) => <TodoList token={this.state.token} {...routerProps} />} 
+                    />
+                </Switch>
+                <Footer />
+            </Router>
+        </body>
+    )
+  }
 }
 
 export default App;
