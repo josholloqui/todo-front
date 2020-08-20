@@ -89,13 +89,13 @@ class TodoList extends React.Component {
                             this.state.tasks.map((task) => {
                                 if(task.completed === false) {
                                     return <li key={`${task.task}+${task.id}`} onClick={() => this.handleUpdate(task.id, task)}>
-                                    <button className='delete' onClick={this.handleDelete}>x</button>
+                                    <button className='delete' onClick={() => this.handleDelete(task.id)}>x</button>
                                     <h3>{task.task}</h3>
                                     <p>{task.completed ? 'Task completed' : 'Not Yet Completed'}</p>
                                     </li>
                                 } else {
                                     return <li className='completed' key={`${task.task}+${task.id}`}>
-                                    <button className='delete-completed' onClick={this.handleDelete}>x</button>
+                                    <button className='delete-completed' onClick={() => this.handleDelete(task.id)}>x</button>
                                     <h3 className='task-completed'>{task.task}</h3>
                                     <p className='task-completed'>{task.completed ? 'Task completed' : 'Not Yet Completed'}</p>
                                     </li>
